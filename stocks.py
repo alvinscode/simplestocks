@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.svm import SVR
 import matplotlib.pyplot as plt
 
-plt.switch_backend('new_backend')
+plt.switch_backend('TkAgg')
 
 dates = []
 prices = []
@@ -13,16 +13,16 @@ def get_data(filename):
         csvFileReader = csv.reader(csvfile)
         next(csvFileReader)
         for row in csvFileReader:
-            dates.append(int(row[0].split('-')[0]))
-            prices.append(float(row[1]))
+            dates.append(int(row[0].split('/')[0]))
+            prices.append(float(row[1].replace('$', '')))
     return
 
 def predict_price(dates, prices, x):
     dates = np.reshape(dates,(len(dates), 1))
 
-    svr_lin = SVR(kernal= 'linear', C=1e3)
-    svr_poly = SVR(kernal= 'poly', C=1e3, degree = 2)
-    svr_rbf = SVR(kernal= 'rbf', C=1e3, gamma=0.1)
+    svr_lin = SVR(kernel= 'linear', C=1e3)
+    svr_poly = SVR(kernel= 'poly', C=1e3, degree = 2)
+    svr_rbf = SVR(kernel= 'rbf', C=1e3, gamma=0.1)
     svr_lin.fit(dates, prices)
     svr_poly.fit(dates, prices)
     svr_rbf.fit(dates,prices)
