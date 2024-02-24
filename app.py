@@ -1,17 +1,25 @@
+import os
 import pandas as pd
 import xgboost as xgb
 import matplotlib.pyplot as plt
 
+# Backend used for data display
 plt.switch_backend('WebAgg')
 
+# Set root directory
+root_directory = os.getcwd()
+
+# Prompt user for file
+file_name = input("Enter CSV file name (including .csv): ")
+csv_file_path = os.path.join(root_directory, file_name)
+
 # Load data from csv file
-data = pd.read_csv('amzn.csv')
+data = pd.read_csv(csv_file_path)
 
 # Convert 'Volume' column to numeric
 data['Volume'] = data['Volume'].str.replace(',', '').astype(int)
 
 # Reverse order of data
-
 data = data.iloc[::-1].reset_index(drop=True)
 
 # Split data into training and testing data sets
@@ -32,7 +40,6 @@ print('Model Predictions:')
 print(predictions)
 
 # Show actual values
-
 print('Actual Values:')
 print(test_data[target])
 
@@ -42,7 +49,6 @@ print('Accuracy:')
 print(accuracy)
 
 # Plot predictions and close price
-
 plt.plot(data['Close'], label='Close Price')
 plt.plot(test_data[target].index, predictions, label='Predictions')
 plt.legend()
