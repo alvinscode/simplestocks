@@ -11,7 +11,6 @@ data = pd.read_csv('amzn.csv')
 data['Volume'] = data['Volume'].str.replace(',', '').astype(int)
 
 # Reverse order of data
-
 data = data.iloc[::-1].reset_index(drop=True)
 
 # Split data into training and testing data sets
@@ -32,7 +31,6 @@ print('Model Predictions:')
 print(predictions)
 
 # Show actual values
-
 print('Actual Values:')
 print(test_data[target])
 
@@ -42,7 +40,6 @@ print('Accuracy:')
 print(accuracy)
 
 # Plot predictions and close price
-
 plt.plot(data['Close'], label='Close Price')
 plt.plot(test_data[target].index, predictions, label='Predictions')
 plt.legend()
