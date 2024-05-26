@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error
 import numpy as np
+import matplotlib.patheffects as path_effects
 
 app = Flask(__name__)
 
@@ -116,18 +117,32 @@ def predict(filename):
     plt.xlabel('Time')
     plt.ylabel('Price')
 
+    def add_shadowed_text(x, y, text, color):
+        txt = plt.text(x, y, text, ha='center', color=color)
+        txt.set_path_effects([path_effects.Stroke(linewidth=3, foreground='black'), path_effects.Normal()])
+
+    step = 100
+    for i in range(0, len(y_train), step):
+        add_shadowed_text(i, y_train.iloc[i], f'{y_train.iloc[i]:.2f}', 'blue')
+        add_shadowed_text(i, train_predictions[i], f'{train_predictions[i]:.2f}', 'orange')
+    for i in range(0, len(y_test), step):
+        add_shadowed_text(i + split_index, y_test.iloc[i], f'{y_test.iloc[i]:.2f}', 'blue')
+        add_shadowed_text(i + split_index, test_predictions[i], f'{test_predictions[i]:.2f}', color='green')
+
     # Predict future prices
     future_predictions = []
     future_X = X_test[-1].reshape(1, -1)  # Use the last data point from the test set as the starting point for prediction
 
     for i in range(10):
         future_prediction = model.predict(future_X)
-        future_predictions.append(future_prediction)
-        future_X = np.append(future_X[:, 1:], future_prediction.reshape(1, -1), axis=1)
+        future_predictions.append(future_prediction[0])
+        future_X = np.array([[future_prediction[0], future_X[0, 1]]])
 
     future_indices = range(len(data), len(data) + 10)  # Generate indices for future predictions
 
-    plt.plot(future_indices, future_predictions, label='Future Predictions', linestyle='-.')
+    plt.plot(future_indices, future_predictions, label='10 Day Prediction', linestyle='-.')
+    add_shadowed_text(future_indices[-1], future_predictions[-1], f'{future_predictions[-1]:.2f}', 'red')
+
     plt.legend()
 
     plot_path = os.path.join(os.getcwd(), 'static', 'plot.png')
