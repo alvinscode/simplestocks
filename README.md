@@ -7,9 +7,11 @@ https://codepen.io/G-Mariem/pen/gOvBjMP
 
 ## Usage
 
+https://simplestocks.onrender.com/ - Deployment
+
 This application is configured to use data from MarketWatch.com.
 
-Download a year of historical quotes of a stock ticker of your choice from MarketWatch.com in the form of a CSV file.
+Download 1YR of historical quotes of a stock ticker of your choice from MarketWatch.com in the form of a CSV file.
 
 Click the "Choose File" button and find the CSV file and open it.
 
