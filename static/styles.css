@@ -73,3 +73,10 @@ body{
 .results {
     text-align: center;
 }
+
+.link {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
