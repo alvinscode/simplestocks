@@ -140,4 +140,4 @@ def predict(filename):
     return render_template('results.html', train_score=train_score, test_score=test_score, train_rmse=train_rmse, test_rmse=test_rmse, plot_url=url_for('static', filename='plot.png'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
