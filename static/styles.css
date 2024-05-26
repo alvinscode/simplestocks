@@ -38,8 +38,6 @@ body{
     clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
   }
   
-  
-  
   .center h1 span:nth-child(2){
     color:#5E17EB;
     transform:translate(-50%,-50%) skewX(-60deg);
@@ -70,4 +68,8 @@ body{
 
 .second {
     text-align: left;
+}
+
+.results {
+    text-align: center;
 }
