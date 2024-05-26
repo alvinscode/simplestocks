@@ -24,7 +24,22 @@ def index():
             file_path = os.path.join(os.getcwd(), filename)
             file.save(file_path)
             if os.path.exists(file_path):
-                return redirect(url_for('predict', filename=filename))
+                try:
+                    data = pd.read_csv(file_path)
+                    if data.empty:
+                        os.remove(file_path)  # Delete the empty file
+                        return 'Uploaded CSV file is empty. Please upload a file with data.', 400
+                    else:
+                        # Check if the expected columns are present
+                        expected_columns = ['Open', 'Volume', 'Close']  # Example columns
+                        if not set(expected_columns).issubset(data.columns):
+                            os.remove(file_path)  # Delete the file if expected columns are missing
+                            return 'Uploaded CSV file is missing expected columns.', 400
+                        else:
+                            return redirect(url_for('predict', filename=filename))  # Corrected route name
+                except (pd.errors.EmptyDataError, KeyError):
+                    os.remove(file_path)  # Delete the file if an error occurs during processing
+                    return 'Error processing the CSV file. Please check the file format and try again.', 400
             else:
                 return 'Failed to save file', 500
         return 'No CSV file uploaded', 400
