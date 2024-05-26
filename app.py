@@ -43,15 +43,7 @@ def index():
             else:
                 return 'Failed to save file', 500
         return 'No CSV file uploaded', 400
-    return '''
-        <h1>Upload CSV File</h1>
-        <form method="post" enctype="multipart/form-data">
-            <input type="file" name="file">
-            <br>
-            <br>
-            <input type="submit" value="View Predictions">
-        </form>
-    '''
+    return render_template('upload_form.html')
 
 @app.route('/predict/<filename>')
 def predict(filename):
