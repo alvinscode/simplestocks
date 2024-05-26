@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Stock Price Predictions</title>
+</head>
+<body>
+  <h1>Stock Price Predictions</h1>
+  <p>Training Accuracy: {{ train_score }}</p>
+  <p>Test Accuracy: {{ test_score }}</p>
+  <p>Training RMSE: {{ train_rmse }}</p>
+  <p>Test RMSE: {{ test_rmse }}</p>
+  <img src="{{ plot_url }}" alt="Stock Price Predictions">
+</body>
+</html>
