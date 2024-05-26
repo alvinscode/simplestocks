@@ -1,7 +1,19 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload CSV File</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
 <h1>Upload CSV File</h1>
 <form method="post" enctype="multipart/form-data">
     <input type="file" name="file">
     <br>
     <br>
-    <input type="submit" value="View Predictions">
+    <input type="submit" value="Upload and View Predictions">
 </form>
+
+</body>
+</html>
