@@ -2,6 +2,9 @@
 
 simplestocks is a Python application that uses XGBoost and scikit-learn machine learning libraries to predict stock prices based off of the past year of stock prices and plots predictions for the next 10 days.
 
+3D Paper Text effect:
+https://codepen.io/G-Mariem/pen/gOvBjMP
+
 ## Usage
 
 This application is configured to use data from MarketWatch.com.
